@@ -495,7 +495,18 @@
         gameState.nameLocative = document.getElementById('player-name-locative').value.trim() || gameState.name;
         gameState.nameVocative = document.getElementById('player-name-vocative').value.trim() || gameState.name;
 
-       
+        // Zapisujemy cały stan danych osobowych do pamięci telefonu
+        localStorage.setItem('zapisanyGameState', JSON.stringify({
+        name: gameState.name,
+        gender: gameState.gender,
+        nameGenitive: gameState.nameGenitive,
+        nameDative: gameState.nameDative,
+        nameAccusative: gameState.nameAccusative,
+        nameAblative: gameState.nameAblative,
+        nameLocative: gameState.nameLocative,
+        nameVocative: gameState.nameVocative
+        }));
+
         switchScreen('screen-start', 'screen-akt1');
     }
 
@@ -557,15 +568,22 @@
     window.addEventListener('DOMContentLoaded', () => {
     const zapisanyEkran = localStorage.getItem('aktualnyEkran');
     const zapisaneUczynki = localStorage.getItem('zapisaneUczynki');
+    const zapisanyState = localStorage.getItem('zapisanyGameState');
 
     if (zapisanyEkran && zapisanyEkran !== 'screen-form') {
+        // 1. Przywracamy imię, płeć i wszystkie odmiany do obiektu gameState
+        if (zapisanyState) {
+            const stan = JSON.parse(zapisanyState);
+            Object.assign(gameState, stan);
+        }
+
+        // 2. Przywracamy dobre uczynki
         if (zapisaneUczynki) {
             const uczynkiTablica = JSON.parse(zapisaneUczynki);
             gameState.uczynki = new Set(uczynkiTablica);
         }
 
-        // Czekamy minimalną chwilę (100 milisekund), aby standardowy skrypt startowy 
-        // zdążył się wykonać, i dopiero wtedy bezpiecznie podmieniamy ekran na ten zapisany.
+        // 3. Czekamy na standardowy skrypt startowy i bezpiecznie podmieniamy ekran
         setTimeout(() => {
             const startScreen = document.getElementById('screen-form');
             const targetScreen = document.getElementById(zapisanyEkran);
@@ -574,10 +592,9 @@
                 startScreen.classList.remove('active');
                 targetScreen.classList.add('active');
                 
-                // Aktualizujemy paragrafy na wczytanym ekranie, aby odmiany działały
+                // Teraz gameState jest pełny, więc ta funkcja zadziała idealnie!
                 aktualizujParagrafy(targetScreen);
                 
-                // Ustawiamy właściwe tło dla wczytanego ekranu
                 document.body.style.background = 'var(--bg-las)'; 
             }
         }, 100);
