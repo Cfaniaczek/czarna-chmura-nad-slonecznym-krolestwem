@@ -506,11 +506,16 @@
         const fromEl = document.getElementById(f);
         const toEl = document.getElementById(t);
 
-        if (uczynki != null)
-        {
-            for(let uczynek of uczynki)
-            {gameState.uczynki.add(uczynek)}
+    // 1. Najpierw dodajemy nowy uczynek (jeśli został przekazany z przycisku)
+    if (uczynki != null) {
+        for (let uczynek of uczynki) {
+            gameState.uczynki.add(uczynek);
         }
+    }
+
+    // 2. Dopiero teraz, gdy stan gry jest kompletny, zapisujemy wszystko do pamięci telefonu
+    localStorage.setItem('aktualnyEkran', t);
+    localStorage.setItem('zapisaneUczynki', JSON.stringify(Array.from(gameState.uczynki)));
 
         console.log("Uczynki:\n")
         for (const uczynek of gameState.uczynki)
@@ -547,11 +552,6 @@
 
         // Twoje płynne przewijanie na górę strony
         window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // Zapisujemy aktualny ekran i uczynki do pamięci telefonu
-        localStorage.setItem('aktualnyEkran', currentScreenId);
-        localStorage.setItem('zapisaneUczynki', JSON.stringify(Array.from(gameState.uczynki)));
-
     }
 
     window.addEventListener('DOMContentLoaded', () => {
