@@ -533,18 +533,6 @@
         {
             console.log(uczynek);
         }
-
-        function aktualizujParagrafy(element){
-            if (element.tagName === 'P'){
-                element.innerHTML = sprawdzWarunkiUczynkow(odmienImie(odmianaCzynnosci(element.innerHTML)));
-            }
-            else{
-                for (const dziecko of element.children){
-                    aktualizujParagrafy(dziecko)
-                }
-            }
-        }
-
         aktualizujParagrafy(toEl)
 
         if (fromEl) fromEl.classList.remove('active');
@@ -570,7 +558,7 @@
     const zapisaneUczynki = localStorage.getItem('zapisaneUczynki');
     const zapisanyState = localStorage.getItem('zapisanyGameState');
 
-    if (zapisanyEkran && zapisanyEkran !== 'screen-form') {
+    if (zapisanyEkran && zapisanyEkran !== 'screen-start' && zapisanyEkran !== 'screen-form') {
         // 1. Przywracamy imię, płeć i wszystkie odmiany do obiektu gameState
         if (zapisanyState) {
             const stan = JSON.parse(zapisanyState);
@@ -585,7 +573,7 @@
 
         // 3. Czekamy na standardowy skrypt startowy i bezpiecznie podmieniamy ekran
         setTimeout(() => {
-            const startScreen = document.getElementById('screen-form');
+            const startScreen = document.getElementById('screen-start');
             const targetScreen = document.getElementById(zapisanyEkran);
 
             if (startScreen && targetScreen) {
@@ -600,6 +588,17 @@
         }, 100);
     }
     });
+
+        function aktualizujParagrafy(element){
+            if (element.tagName === 'P'){
+                element.innerHTML = sprawdzWarunkiUczynkow(odmienImie(odmianaCzynnosci(element.innerHTML)));
+            }
+            else{
+                for (const dziecko of element.children){
+                    aktualizujParagrafy(dziecko)
+                }
+            }
+        }
 
     function goToForm() {
         switchScreen('screen-akt2', 'screen-form', 'var(--bg-wioska)');
