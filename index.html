@@ -389,7 +389,7 @@
     Pamiętasz skrzata i wszystkich innych, którym @${pomogłeś/pomogłaś}? Twoja chęć niesienia pomocy zmieniła ich świat na lepsze, a dobro, które @${podarowałeś/podarowałaś} innym, wróciło do Ciebie w najważniejszym momencie pod murami zamku. To najważniejsza magia, jaką dzisiaj @${odkryłeś/odkryłaś} – dobroć ma wielką moc.<br><br>
     Twoje uczynki napawają moje serce dumą! Pamiętaj, że w prawdziwym świecie, poza stronami tej książeczki, Twoje małe i duże dobre uczynki również mają ogromne znaczenie. Każdego dnia możesz być @${takim/taką} @${wspaniałym/wspaniałą} @${bohaterem/bohaterką} dla kogoś wokół siebie. Dziękuję Ci za ten wspólny, magiczny czas!<br>
     (PRZYTUL DZIECKO I POCHWAL JE)  </p></div>
-    <div><button class="btn" onclick="switchScreen('screen-zamekFinał', 'screen-form', 'var(--bg-las)')">Dziękujemy za wspólną przygodę.</button>
+    <div><button class="btn" onclick="localStorage.clear(); switchScreen('screen-zamekFinał', 'screen-form', 'var(--bg-las)')">Dziękujemy za wspólną przygodę.</button>
     </div></div>
 
 	<!-- ================================================================= -->
@@ -547,15 +547,37 @@
 
         // Twoje płynne przewijanie na górę strony
         window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Zapisujemy aktualny ekran i uczynki do pamięci telefonu
+        localStorage.setItem('aktualnyEkran', currentScreenId);
+        localStorage.setItem('zapisaneUczynki', JSON.stringify(Array.from(gameState.uczynki)));
+
     }
+
+    window.addEventListener('DOMContentLoaded', () => {
+    const zapisanyEkran = localStorage.getItem('aktualnyEkran');
+    const zapisaneUczynki = localStorage.getItem('zapisaneUczynki');
+
+    // Jeśli rodzic czytał już wcześniej bajkę i nie skończył jej
+    if (zapisanyEkran && zapisanyEkran !== 'screen-form') {
+        if (zapisaneUczynki) {
+            const uczynkiTablica = JSON.parse(zapisaneUczynki);
+            gameState.uczynki = new Set(uczynkiTablica);
+        }
+        // Przenosimy użytkownika prosto do momentu, w którym przerwał
+        // (Podmień 'var(--bg-las)' na domyślny kolor tła, jeśli jest inny na starcie)
+        switchScreen('screen-form', zapisanyEkran, 'var(--bg-las)');
+    }
+    });
 
     function goToForm() {
         switchScreen('screen-akt2', 'screen-form', 'var(--bg-wioska)');
     }
 
     function resetStory() {
-        location.reload();
-    }
+    localStorage.clear(); // Czyści pamięć zapisu, żeby bajka nie wznawiała się na końcu
+    location.reload();
+}
 </script>
 </body>
 </html>
