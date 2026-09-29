@@ -558,15 +558,29 @@
     const zapisanyEkran = localStorage.getItem('aktualnyEkran');
     const zapisaneUczynki = localStorage.getItem('zapisaneUczynki');
 
-    // Jeśli rodzic czytał już wcześniej bajkę i nie skończył jej
     if (zapisanyEkran && zapisanyEkran !== 'screen-form') {
         if (zapisaneUczynki) {
             const uczynkiTablica = JSON.parse(zapisaneUczynki);
             gameState.uczynki = new Set(uczynkiTablica);
         }
-        // Przenosimy użytkownika prosto do momentu, w którym przerwał
-        // (Podmień 'var(--bg-las)' na domyślny kolor tła, jeśli jest inny na starcie)
-        switchScreen('screen-form', zapisanyEkran, 'var(--bg-las)');
+
+        // Czekamy minimalną chwilę (100 milisekund), aby standardowy skrypt startowy 
+        // zdążył się wykonać, i dopiero wtedy bezpiecznie podmieniamy ekran na ten zapisany.
+        setTimeout(() => {
+            const startScreen = document.getElementById('screen-form');
+            const targetScreen = document.getElementById(zapisanyEkran);
+
+            if (startScreen && targetScreen) {
+                startScreen.classList.remove('active');
+                targetScreen.classList.add('active');
+                
+                // Aktualizujemy paragrafy na wczytanym ekranie, aby odmiany działały
+                aktualizujParagrafy(targetScreen);
+                
+                // Ustawiamy właściwe tło dla wczytanego ekranu
+                document.body.style.background = 'var(--bg-las)'; 
+            }
+        }, 100);
     }
     });
 
