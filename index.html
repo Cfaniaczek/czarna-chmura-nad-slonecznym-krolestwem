@@ -558,31 +558,37 @@
     const zapisaneUczynki = localStorage.getItem('zapisaneUczynki');
     const zapisanyState = localStorage.getItem('zapisanyGameState');
 
-    if (zapisanyEkran && zapisanyEkran !== 'screen-start' && zapisanyEkran !== 'screen-form') {
-        // 1. Przywracamy imię, płeć i wszystkie odmiany do obiektu gameState
-        if (zapisanyState) {
-            const stan = JSON.parse(zapisanyState);
-            Object.assign(gameState, stan);
-        }
+    // System wznawia grę tylko wtedy, gdy rodzic przeszedł już Ekran 1 i Ekran 2
+    if (zapisanyState && zapisanyEkran && zapisanyEkran !== 'screen-parent-intro' && zapisanyEkran !== 'screen-start') {
+        
+        // 1. Przywracamy imię, płeć i wszystkie przypadki odmian do obiektu gameState
+        const stan = JSON.parse(zapisanyState);
+        Object.assign(gameState, stan);
 
-        // 2. Przywracamy dobre uczynki
+        // 2. Przywracamy zebrane do tej pory dobre uczynki
         if (zapisaneUczynki) {
             const uczynkiTablica = JSON.parse(zapisaneUczynki);
             gameState.uczynki = new Set(uczynkiTablica);
         }
 
-        // 3. Czekamy na standardowy skrypt startowy i bezpiecznie podmieniamy ekran
+        // 3. Ukrywamy ekrany początkowe i bezpiecznie wywołujemy zapamiętany moment przygody
         setTimeout(() => {
+            const introScreen = document.getElementById('screen-parent-intro');
             const startScreen = document.getElementById('screen-start');
             const targetScreen = document.getElementById(zapisanyEkran);
 
-            if (startScreen && targetScreen) {
-                startScreen.classList.remove('active');
+            // Wyłączamy aktywność ekranów startowych
+            if (introScreen) introScreen.classList.remove('active');
+            if (startScreen) startScreen.classList.remove('active');
+
+            // Aktywujemy zapamiętany ekran przygody
+            if (targetScreen) {
                 targetScreen.classList.add('active');
                 
-                // Teraz gameState jest pełny, więc ta funkcja zadziała idealnie!
+                // Uruchamiamy Twoją wyciągniętą na zewnątrz funkcję odmian na pełnym obiekcie gameState
                 aktualizujParagrafy(targetScreen);
                 
+                // Przypisujemy odpowiednie tło leśne/górskie przy wznowieniu (dostosuj zmienną w razie potrzeby)
                 document.body.style.background = 'var(--bg-las)'; 
             }
         }, 100);
