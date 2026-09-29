@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Czarna chmura nad Słonecznym Królestwem</title>
+    <style>
+        :root { --bg-wioska: #f7f8a0; --bg-las: #88fa65; --bg-podziemia: #8d8c8c; --bg-gory: #afd7ff; --bg-zamek: #c8a4ee; --text-main: #2B2B2B; --text-magic: #1A5F3A; --text-parent: #B63250; --accent-purple: #5A3E74; }
+        body { font-family: 'Georgia', serif; background-color: var(--bg-wioska); color: var(--text-main); line-height: 1.8; padding: 20px; margin: 0; display: flex; justify-content: center; transition: background-color 0.8s ease; }
+        .container { max-width: 600px; width: 100%; background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .screen { display: none; } .active { display: block; }
+        h1 { color: #D4A373; text-align: center; font-size: 26px; }
+        .author { text-align: center; font-style: italic; color: #777; font-size: 14px; margin-bottom: 20px; }
+        h2 { color: var(--accent-purple); font-size: 20px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        p { margin-bottom: 20px; font-size: 17px; text-align: justify; }
+        .italic { font-style: italic; color: #555; } .magic { color: var(--text-magic); font-weight: bold; }
+        .parent { color: var(--text-parent); font-weight: 500; background-color: #FFF0F2; padding: 10px; border-left: 4px solid var(--text-parent); border-radius: 4px; margin: 20px 0; }
+        .btn { display: block; width: 100%; padding: 15px; margin: 15px 0; background: #D4A373; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; text-align: center; font-weight: bold; box-sizing: border-box; }
+        .btn:hover { background: #C39262; } .btn-choice { background: #e9edc9; color: #2b2b2b; border: 2px solid #ccd5ae; text-align: left; }
+        input[type="text"], select, textarea { width: 100%; padding: 12px; margin: 10px 0 20px 0; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
+        .radio-group { margin-bottom: 20px; } .radio-option { margin: 10px 0; display: flex; align-items: center; } .radio-option input { margin-right: 10px; transform: scale(1.2); }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ================================================================= -->
+	<!-- EKRAN 1: WPROWADZENIE DLA RODZICA                                 -->
+	<!-- ================================================================= -->
+	<div id="screen-parent-intro" class="screen active">
+        <h1>Czarna chmura nad Słonecznym Królestwem</h1>
+        <div class="author">Autor: SzyLinG </div>
+        
+        <h2>Witaj w świecie interaktywnej przygody! 🌟</h2>
+        <p>Przed Tobą wyjątkowa książka, którą stworzysz wspólnie ze swoim dzieckiem. Ta opowieść dostosowuje się do Was, a Twoje dziecko stanie się jej głównym bohaterem. Aby wspólne czytanie na telefonie było wspaniałą zabawą i nauką, przygotowaliśmy mały przewodnik po kolorach tekstu:</p>
+        
+        <p>• <strong>Tekst czarny</strong> – to klasyczna opowieść i piękne opisy świata. Czytaj je powoli, budując nastrojowy klimat.</p>
+        <p class="italic">• Tekst zapisany kursywą (Skośny) – to momenty, w których narrator zwraca się bezpośrednio do Twojego dziecka. Przeczytaj go z ciekawością w głosie!</p>
+        <p class="magic">• Tekst zielony – to Magiczne Zaklęcia. Przeczytaj je głośno, a potem zrób pauzę i poproś dziecko, aby powtórzyło je razem z Tobą. Magia zadziała tylko wtedy, gdy maluch wypowie te słowa!</p>
+        <div class="parent">• Tekst różowy – to Strefa Bliskości. Te zdania są skierowane bezpośrednio do Ciebie, rodzicu. Wyjdź na chwilę z roli narratora, mocno przytul swoją pociechę, pochwal ją za dobrą decyzję i zadaj jej krótkie pytanie o emocje.</div>
+
+		<button class="btn" onclick="switchScreen('screen-parent-intro', 'screen-start', 'var(--bg-wioska)')">Przejdź do odmiany imienia dziecka.       ( NACIŚNIJ   TU )</button>
+	</div>
+
+	<!-- ================================================================= -->
+	<!-- EKRAN 2: FORMULARZ PERSONALIZACJI (Wszystkie 7 przypadków)        -->
+	<!-- ================================================================= -->
+    <div id="screen-start" class="screen">
+        <h1>Czarna chmura nad Słonecznym Królestwem</h1>
+        <p class="subtitle">Drogi Rodzicu! Uzupełnij poniższe zdania imieniem swojego dziecka, aby historia brzmiała naturalnie.</p>
+
+    <div class="setup-form">
+        <div class="form-group">
+            <label for="player-gender">Wybierz płeć dziecka:</label>
+            <select id="player-gender">
+                <option value="m">Chłopiec</option>
+                <option value="k">Dziewczynka</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="player-name">To jest...</label>
+            <input type="text" id="player-name" placeholder="np. Kubuś / Kasia">
+        </div>
+
+        <div class="form-group">
+            <label for="player-name-genitive">W pokoju nie ma teraz...</label>
+            <input type="text" id="player-name-genitive" placeholder="np. Kubusia / Kasi">
+        </div>
+
+        <div class="form-group">
+            <label for="player-name-dative">Podarowałem nową zabawkę...</label>
+            <input type="text" id="player-name-dative" placeholder="np. Kubusiowi / Kasi">
+        </div>
+
+        <div class="form-group">
+            <label for="player-name-accusative">Rodzice mocno przytulili...</label>
+            <input type="text" id="player-name-accusative" placeholder="np. Kubusia / Kasię">
+        </div>
+
+        <div class="form-group">
+            <label for="player-name-ablative">Wszyscy poszli na spacer z...</label>
+            <input type="text" id="player-name-ablative" placeholder="np. Kubusiem/ Kasią">
+        </div>
+
+        <div class="form-group">
+            <label for="player-name-locative">Dziadkowie zawsze ciepło myślą o...</label>
+            <input type="text" id="player-name-locative" placeholder="np. Kubusiu / Kasi">
+        </div>
+
+        <div class="form-group">
+            <label for="player-name-vocative">Zawołasz dziecko: „Chodź do mnie,...!”</label>
+            <input type="text" id="player-name-vocative" placeholder="np. Kubusiu / Kasiu">
+        </div>
+		<button class="btn" onclick="startStory()">Rozpocznij Przygodę</button>
+	</div>
+</div>
+
+	<!-- ================================================================= -->
+	<!-- EKRAN 3: AKT I - ROZPOCZĘCIE PRZYGODY                             -->
+	<!-- ================================================================= -->
+    <div id="screen-akt1" class="screen">
+    <p>Dawno, dawno temu, za siedmioma górami i gęstymi lasami, leżało niezwykłe Słoneczne Królestwo. Była to kraina, w której trawa miała kolor najsoczystszej zieleni, a rzeki szumiały cichutko, jakby nuciły dzieciom kołysanki do poduszki. Wszyscy mieszkańcy byli tu dla siebie milsi niż w jakiejkolwiek innej krainie. Ptaki śpiewały od samego rana, a kolorowe motyle tańczyły nad płatkami kwiatów, które co rano rozwijały się, by łapać pierwsze promienie słońca.</p>
+    <p>W samym środku tego pięknego królestwa znajdowała się mała, urocza wioska. To właśnie tam @${mieszkał/mieszkała} niezwykle @${odważny/odważna} @${mały chłopiec/mała dziewczynka} – @#MIAN.</p>
+    <p>Każdego ranka, gdy słońce wschodziło nad horyzontem, @#MIAN @${budził/budziła} się z uśmiechem na twarzy, @${gotów/gotowa} na nowe przygody. Niestety, tego dnia poranek wyglądał zupełnie inaczej.</p>
+    <p>Słońce ledwo zdążyło musnąć promieniami dach małego domku, gdy nagle na niebie pojawiła się ogromna, ciężka, czarna chmura. Zła Królowa z odległej krainy wywołała ją, by zabrać królestwu całe ciepło i blask. Chmura była tak wielka, że w mgnieniu oka zasłoniła niebo, i zaczął z niej padać gęsty deszcz. Powodowało to, że słońce widać było tylko z rana, zanim wzeszło wyżej i zostało zasłonięte, oraz wieczorem, tuż przed zachodem. Deszcz psuł dzieciom plany na zabawę, a dorosłym bardzo utrudnił pracę w polu.</p>
+    <p>@#MIAN @${spojrzał/spojrzała} przez okno na ciemniejące niebo. @${Pomyślał/Pomyślała}, że królestwo jak najszybciej potrzebuje pomocy. @${Postanowił/Postanowiła} samodzielnie pomóc krainie i sprawić, by ta okropna chmura zniknęła raz na zawsze.</p>
+    <p>Nasza mała postać poprawiła kapturek, zasznurowała mocno buty i raźnym krokiem ruszyła z domu prosto na zamgloną, wiodącą przez pola i łąki ścieżkę.</p>
+    
+    <h2>Spotkanie na ścieżce</h2>
+    <p>Po kilkunastu minutach marszu, tuż obok starego, zwalonego pnia dębu, @#MIAN @${usłyszał/usłyszała} ciche wzdychanie: <em>„Ach, jakie to ciężkie... Och, jak daleko jeszcze...”</em>.</p>
+    <p>Gdy @${podszedł/podeszła} bliżej, @${zauważył/zauważyła} małego Skrzata w czerwonej czapeczce. Skrzat był tak malutki, że ledwo wystawał ponad trawę, a na plecach dźwigał ogromny, wiklinowy kosz po brzegi wypełniony leśnymi jagodami. Maluch co kilka kroków potykał się o korzenie i widać było że ogromny to dla niego ciężar. Często musiał odpoczywać, ocierając pot z czoła.</p>
+    <p class="italic">@#W, czy pomożesz skrzatowi dźwigać ten ciężki kosz, czy wskażesz mu krótszą drogę?</p>
+    
+    <button class="btn btn-choice" onclick="switchScreen('screen-akt1', 'screen-skrzat-yes', 'var(--bg-wioska)', ['maJagody'])">🍓 Pomagam Skrzatowi nieść ciężki kosz z jagodami.</button>
+    <button class="btn btn-choice" onclick="switchScreen('screen-akt1', 'screen-skrzat-no', 'var(--bg-wioska)')">🗺️ Spieszę się i pokazuję Skrzatowi krótszą i bezpieczną drogę.</button>
+    </div>
+
+	<!-- ================================================================= -->
+	<!-- EKRAN 4: REZULTAT WYBORU Z AKTU I - POMOC DLA SKRZATA             -->
+	<!-- ================================================================= -->
+
+    <div id="screen-skrzat-yes" class="screen">
+    <p>@#MIAN nie @${zastanawiał/zastanawiała} się ani chwili. @${Podszedł/Podeszła} bliżej, @${uśmiechnął/uśmiechnęła} się szeroko do zmartwionego malucha i @${chwycił/chwyciła} za drugie ucho ciężkiego kosza. Skrzat aż podskoczył z radości! Razem szło się o wiele raźniej. Krok za krokiem maszerowali wąską, usłaną mchem ścieżką, a mały skrzat z wielkim przejęciem szeptał i opowiadał o największych leśnych tajemnicach – o tym, które drzewa potrafią nucić kołysanki i gdzie nad ranem chowają się leśne świetliki. Po krótkiej wędrówce donieśli pełen kosz aż pod same drzwi małego domku. Wyglądał on niezwykle przytulnie, ukryty bezpiecznie w potężnych korzeniach wielkiego, starego dębu.</p>
+    <p>„Dziękuję ci, dzielny wędrowcze!” – pisnął z wdzięczności mały skrzat. „W nagrodę za twoje dobre i czyste serce, weź proszę to” – dodał i wręczył @#CEL miękką, kolorową chustkę, która mieniła się w półmroku leśnych gęstwin. Następnie maluch sięgnął do przyniesionego przed chwilą kosza i z uśmiechem odliczył prosto na tkaninę sporą garść soczystych, słodkich, pachnących leśnych jagód. Owoce lśniły niczym maleńkie, fioletowe klejnoty, a chustka chroniła je przed rozsypaniem i pognieceniem.</p>
+    <p>@#MIAN @${schował/schowała} ten drogocenny skarb głęboko do swojej torby, dbając o to, by nie uronić ani jednej jagody i nie zgubić pięknej tkaniny. @${Pomyślał/Pomyślała}, że @${zrobił/zrobiła} coś naprawdę pięknego.</p>
+
+    <div class="parent"><p>Och, jak to miło, że @${pomogłeś/pomogłaś} skrzatowi! Pomaganie innym to cecha prawdziwego bohatera. Czy Tobie też zrobiło się cieplej na serduszku?</p>
+    </div>
+    <button class="btn" onclick="switchScreen('screen-skrzat-yes', 'screen-poSkrzacie')">Ruszamy dalej.</button>
+    </div>
+
+    <div id="screen-skrzat-no" class="screen">
+    <p>@#MIAN @${podszedł/podeszła} do Skrzata i @${kucnął/kucnęła} przy nim na wilgotnej trawie. „Nie martw się, mały przyjacielu!” – @${powiedział/powiedziała} ciepłym głosem. „Ja się spieszę i nie mogę Ci pomóc, a ta błotnista droga przez gęsty las jest teraz przez ten ulewny deszcz bardzo śliska i niebezpieczna. Z tak ciężkim koszem łatwo się tu poślizgnąć i zrobić sobie krzywdę. Ale spójrz tam, za te wysokie krzaki dzikiej róży. Tam ukryta jest sucha, kamienna ścieżka, która prowadzi prosto do twojego domku. Wielkie liście paproci tworzą nad nią daszek, więc miniesz wielką paproć i będziesz na miejscu bezpieczny w kilka chwil!”.</p>
+
+    <p>Skrzat spojrzał we wskazanym kierunku, a na jego zmęczonej twarzy pojawiła się wielka ulga. Wyobraził sobie, jak ciężko byłoby mu brnąć z koszem przez śliskie, zdradliwe błoto. „Och, masz rację!” – zawołał uradowany, a na jego buzi zagościł szeroki uśmiech. Maluch, chcąc podziękować za mądrą i cenną radę, która uchroniła go przed niebezpieczną wędrówką, rozwiązał mały supełek na szyi. Podał @#CEL miękką, kolorową chustkę, która była zrobiona z delikatnego, czystego materiału, idealnego by osłonić coś przed wiatrem lub chłodem i mogła się jeszcze bardzo przydać w tej długiej podróży. </p>
+    <p>@#MIAN @${schował/schowała} chustkę do kieszeni, ciesząc się, że mimo iż nie @${miał/miała} czasu dźwigać kosza to @${pomógł/pomogła} skrzatowi bezpiecznie wrócić do jego przytulnego domku, chroniąc go przed groźnym upadkiem na śliskim szlaku.</p>
+
+    <div class="parent"><p>To była bardzo mądra decyzja! Pokazując skrzatowi suchą ścieżkę @${uratowałeś/uratowałaś} go przed groźnym upadkiem. Brawo!</p>
+    </div>
+
+    <button class="btn btn-choice" onclick="switchScreen('screen-skrzat-no', 'screen-poSkrzacie',)">Ruszamy dalej bo czas nagli.</button>
+    </div>
+
+    <div id="screen-poSkrzacie" class="screen">
+    <h2>🔀 Wielki Wybór: Gdzie idziemy?</h2>
+    <p>Po rozstaniu ze skrzatem, @#MIAN @${ruszył/ruszyła} dalej przed siebie. Deszcz z czarnej chmury Złej Królowej padał coraz mocniej, a ciężkie krople bębniły o liście i spływały lodowatymi strużkami po plecach małego wędrowca. Marsz przy takiej pogodzie zdecydowanie nie należał do najprzyjemniejszych. Przemoczone ubranie stawało się coraz cięższe, a chłodny wiatr przeszywał do szpiku kości, przez co każdy kolejny krok wymagał sporego wysiłku. Droga niemiłosiernie się dłużyła, a brak towarzystwa dokuczał prawie tak samo, jak wszechobecny deszcz i chłód. @#MIAN marzył już tylko o tym, by znaleźć jakiekolwiek bezpieczne miejsce i choć na chwilę schować się przed deszczem Złej Królowej.</p>
+    <p>Wkrótce ścieżka doprowadziła @${naszego/naszą} @${bohatera/bohaterkę} do wielkiego rozwidlenia dróg, tuż u podnóża ogromnej, skalistej i tajemniczej góry. Stojąc na rozstaju, @${przemarznięty/przemarznięta} @#MIAN @${rozejrzał/rozejrzała} się uważnie, próbując ocenić, która ścieżka da @${mu/jej} lepsze schronienie przed szalejącą ulewą.</p>
+    <p>Pierwsza droga skręcała w stronę gęstej, prastarej puszczy, gdzie mieszkały leśne Elfy, Entowie i driady. Choć las wydawał się mroczny, to potężne, wiekowe dęby i rozłożyste świerki tworzyły nad ścieżką niesamowicie gęsty, zielony dach. Wyglądało na to, że splecione korony drzew zatrzymują większość kropel deszczu. Ta ścieżka była usłana miękkim mchem i pachniała mokrą korą. Obiecywała, że pod osłoną strażników lasu @#MIAN szybko znajdzie suchy kąt i bezpieczną przystań, chronioną przed okiem Złej Królowej przez same leśne stworzenia.<br>
+    Druga ścieżka prowadziła prosto w głąb potężnego zbocza, niknąc w wejściu do wielkiej, kamiennej jaskini. Wielki, skalny łuk ział chłodem, ale dawał gwarancję całkowitego odcięcia się od ulewnego deszczu i szalejącego na powierzchni wiatru. Gdy @#MIAN @${wytężył/wytężyła} wzrok, @${zauważył/zauważyła}, że mroczny korytarz wcale nie jest zupełnie ciemny – w głębi skał, na surowych ścianach, delikatnie migotały tysiące kolorowych minerałów i kryształów, rozświetlając drogę niczym małe lampki. Ten podziemny świat skrywał królestwo sprytnych gnomów i szeptał o starożytnych sekretach ukrytych w mrokach jaskiń. Podziemny strop wydawał się potężną, nienaruszalną tarczą przed magią rzuconą na królestwo.</p>
+
+    <p class="italic">Czy nie boisz się, @#W, ciemnych podziemi, sprytnych gnomów i innych podziemnych tajemnic? Czy jesteś @${gotów/gotowa} wyruszyć w podróż przez mroki i sekrety wielkich jaskiń?</p>
+    <p class="italic">A może wolisz podróżować przez pachnące tereny leśnych Elfów pełne prastarych drzew, Entów i driad?</p>
+    <p class="italic">Którą ścieżką poprowadzą Cię Twoje kroki?</p>
+
+    <button class="btn btn-choice" onclick="switchScreen('screen-poSkrzacie', 'screen-akt2-las', 'var(--bg-las)')">🌳 Wybieram podróż przez zielone, pełne stworzeń lasy.</button>
+    <button class="btn btn-choice" onclick="switchScreen('screen-poSkrzacie', 'screen-akt2-podziemia', 'var(--bg-podziemia)')">🪨 Wybieram podróż przez mroczne, pełne tajemnic podziemia.</button>
+    </div>
+
+	<!-- ================================================================= -->
+	<!-- EKRAN 5: AKT II - ŚCIEŻKA PRZEZ LAS                               -->
+	<!-- ================================================================= -->
+	<div id="screen-akt2-las" class="screen">
+    <p>@#MIAN śmiało @${skierował/skierowała} swoje kroki na leśny szlak. Gdy tylko @${przekroczył/przekroczyła} linię pierwszych drzew, wokół rozniósł się przepiękny zapach wilgotnego mchu, poziomek i sosnowych igieł. Wielkie krople bębniły rytmicznie o korony dębów i buków, grając najpiękniejszą leśną muzykę.</p>
+    
+    <p>Wokół panował niesamowity, baśniowy spokój. Ścieżka zaczęła powoli piąć się w górę, zakręcając wokół pni drzew, które były ogromne. W końcu dróżka zamieniła się w strome, drewniane schodki prowadzące... prosto w korony drzew! Wędrowanie po szerokich pomostach, rozciągniętych bardzo wysoko między potężnymi gałęziami, zapierało dech w piersiach. Spoglądając w dół przez szczeliny w deskach, można było dostrzec daleki, zielony dywan paproci, krzaczki dzikich malin i kręte leśne ścieżki, które teraz wydawały się malutkie jak nitki. Gdzieś w dole przemknęła ruda wiewiórka, a stado małych, kolorowych ptaszków ćwierkało wesoło, przelatując tuż pod stopami, całkowicie bezpieczne przed deszczem pod osłoną wielkich liści.</p>
+    
+    <p>Ta niesamowita podniebna wędrówka trwała dłuższą chwilę, aż nagle drogę zablokowała urwana kładka. Pomiędzy dwoma wielkimi dębami brakowało kawałka mostku, a w dole widać było płynący wartko leśny potok. Na skraju urwanej kładki siedział mały chłopiec.</p>
+    
+    <h2>Spotkanie z Rudzikiem</h2>
+    <p>Chłopiec miał na sobie zieloną kamizelkę, a jego włosy były tak niesamowicie rude, że błyszczały w leśnym półmroku tak radośnie, jakby miał na głowie małe, iskrzące ognisko.</p>
+    
+    <p>„Cześć! Jestem Rudzik, ale niektórzy wołają na mnie po prostu Rudy, bo mam piękne złociste włosy!” – zawołał wesoło. „Chcesz przejść na drugą stronę? Ja potrafię biegać po gałęziach, ale ty potrzebujesz mostu. Chętnie ci pomogę, ale... sam mam mały kłopot!”</p>
+    
+    <p>Rudzik pokazał na wielką, ciężką deskę, która leżała obok niego. Chciał ją przesunąć nad dziurą w mostku, ale deska utknęła mocno uwięziona między grubymi konarami drzewa. Chłopiec ciągnął z całych sił, ale potężne konary trzymały deskę jak imadło. Siła nic tu nie mogła wskórać.</p>
+    
+    <p>@#MIAN @${zastanawiał/zastanawiała} się przez chwilę, po czym bystro @${przyjrzał/przyjrzała} się splecionej gęstwinie. Szybko @${zauważył/zauważyła} leżącą nieopodal długą, grubą gałąź i @${wpadł/wpadła} na genialny pomysł. Ostrożnie @${podszedł/podeszła} bliżej, z pomocą Rudzika @${wsunął/wsunęła} gruby kij pod zakleszczoną deskę i @${zaparł/zaparła} go mocno o sąsiedni, potężny i sztywny konar, tworząc dźwignię!</p>
+    
+    <p>Następnie wspólnie, wkładając w to całą swoją energię, mocno nacisnęli na sam koniec gałęzi. Drewno zatrzeszczało pod wielkim naciskiem, stawiając wyraźny opór, ale po chwili ciężka deska głośno szorując o gałęzie w końcu ustąpiła i wyskoczyła z ciasnego uścisku potężnych konarów! Razem, powoli i z niemałym trudem, pchnęli uwolnioną deskę nad przepaścią, tworząc bezpieczny, stabilny mostek. Gdy @#MIAN @${był/była} już @${bezpieczny/bezpieczna} po drugiej stronie, Rudzik wyciągnął zza pasa mały przedmiot.</p>
+    
+    <p>„Jesteś niesamowicie @${sprytny/sprytna}, @#W! Bez twojej pomocy ta deska pozostałaby w tych konarach na zawsze” – powiedział Rudzik, podając <strong>Sękaty Kij</strong>. „To podziękowanie za twoją pomoc. Pamiętaj: drzemie w nim wielka, ukryta tajemnica i niezwykłe właściwości. Na pewno ci pomoże, gdy na twojej drodze wyrośnie wysoka przeszkoda!”</p>
+    
+    <div class="parent"><p>(POCHWAL DZIECKO) Ależ Ty masz sprytne pomysły! Wymyślenie takiej dźwigni by pomóc Rudzikowi wymagało prawdziwej bystrości. Swietna robota @${mój mały bohaterze/moja mała bohaterko.}</p></div>
+
+    <h2>🏔️ Skrzyżowanie u stóp góry</h2>
+    <p>Las zaczął powoli rzednąć, a potężne dęby ustąpiły miejsca wielkim, szarym skałom, które piętrzyły się stromo przy samym podnóżu ogromnej góry. Deszcz wciąż bębnił o kamienie, gdy nagle @#MIAN @${zobaczył/zobaczyła} przed sobą wyraźne rozwidlenie dróg.</p>
+    
+    <p>Ścieżka skręcająca w lewo prowadziła prosto ku mrocznemu, ziejącemu chłodem wejściu do głębokiej jaskini. Z ciemnego otworu w skale wydobywał się tajemniczy szum podziemnego wiatru, a wejścia strzegły ostre, kamienne sople. Droga ta zdawała się prowadzić w same mroczne, nieznane dotąd tunele, pełne sekretów ukrytych głęboko w sercu góry.</p>
+    
+    <p>Z kolei ścieżka biegnąca w prawą stronę omijała skalne urwiska i wiła się łagodnie wzdłuż zbocza góry. Zdawała się ona zmierzać w stronę wielkich, otwartych polan i tajemniczych, mglistych jezior, gdzie pośród starych wierzb szumiały prastare drzewa.</p>
+    
+    <p>Którą ścieżką poprowadzą Cię Twoje kroki?</p>
+  
+    <button class="btn btn-choice" onclick="switchScreen('screen-akt2-las', 'screen-akt3-polany', 'var(--bg-las)', ['sękatyKij'])">🌲 Idę dalej leśną ścieżką w stronę wielkich polan i jezior.</button>
+    <button class="btn btn-choice" onclick="switchScreen('screen-akt2-las', 'screen-akt3-gory', 'var(--bg-gory)', ['sękatyKij'])">🏔️ Wchodzę do jaskini i sprawdzam co kryją wnętrza góry.</button>
+	</div>
+
+	<!-- ================================================================= -->
+	<!-- EKRAN 5: AKT II - ŚCIEŻKA PRZEZ PODZIEMIA                         -->
+	<!-- ================================================================= -->
+	<div id="screen-akt2-podziemia" class="screen">
+    <p>@#MIAN odważnie @${skierował/skierowała} swoje kroki prosto do wnętrza wielkiej, skalnej jaskini. Podziemia wcale nie były straszne! Na ścianach jaskini gęsto rosły niezwykłe, podziemne mchy, które świeciły delikatnym, kojącym, błękitnym blaskiem, idealnie rozjaśniając drogę. Nagle – <em>ojoj!</em> – nóżka @#DOP natrafiła na coś niezwykle śliskiego. @#MIAN @${machnął/machnęła} rączkami i… <em>klap!</em> – @${wylądował/wylądowała} na niezbyt miękkiej ziemi.</p>
+    <p>Gdy @${przyjrzał/przyjrzała} się skale, @${zauważył/zauważyła}, że ze szczeliny w ścianie sączy się gęsta, czarna maź. Była tak śliska, że przypominała najprawdziwszy olej! @#MIAN @${wstał/wstała}, @${otrzepał/otrzepała} ubranko i @${zapamiętał/zapamiętała} to nieprzyjemne zdarzenie i dziwne miejsce. Od teraz muszę bardziej uważać gdzie stawiam nogi @${pomyślał/pomyślała}.</p>
+    <p>Chwilę później na ziemi pojawiły się dwie błyszczące, metalowe szyny. Ze skrzyżowania jaskiniowych korytarzy, z głośnym, wesołym <em>„Turkot, turkot! Stuk, stuk!”</em>, wyjechał mały, drewniany pojazd na kółkach. Niestety, z kółek dobiegało też okropne piszczenie: <em>iiiich! piiich! skrrrzip!</em> Pojazd zwalniał, aż zatrzymał się tuż przed bohaterem.</p>
+    
+    <h2>Spotkanie ze Śmigaczem</h2>
+    <p>W pojeździe siedział wesoły chłopiec w lśniącym kasku. „Cześć! Jestem Śmigacz!” – zawołał. „Moje nóżki po wypadku nie pracują tak jak u innych, ale mój wózek to moja duma! Zazwyczaj mknę po tych podziemnych torach jak błyskawica, ale przez ten nieustający deszcz zrobiła się straszna wilgoć i kółka strasznie zardzewiały. Tarcia są tak duże, że ledwo mogę poruszyć dźwignią. Boję się, że nie dam rady dojechać do domu…”</p>
+    <p class="italic"> @#W, co możemy zrobić? Kółka piszczą i stawiają opór, a przecież pamiętasz o tej super śliskiej mazi wyciekającej ze skały kawałek drogi wcześniej...</p>
+    <p>@#MIAN od razu @${pomyślał/pomyślała} o sprytnym rozwiązaniu! @${pobiegł/pobiegła} do miejsca gdzie wcześniej się @${pośliznął/pośliznęła}, @${nabrał/nabrała} na duży liść paproci trochę czarnej mazi. Szybko @${wrócił/wróciła} i dokładnie @${posmarował/posmarowała} nią kółka wózka.</p>
+    <p>Wózek ruszył gładko, cichutko i niesamowicie szybko! Śmigacz z wielką radością przeskoczył wózkiem nad wielkim zapadliskiem skalnym, a po drugiej stronie przestawił specjalną wajchę, wysuwając bezpieczny, żelazny mostek.</p>
+    <p>„Jesteś niezwykle @${sprytny/sprytna}, @#W! Moje kółka kręcą się teraz bez oporu a wózek mknie szybko jak błyskawica!” – powiedział Śmigacz, podając <strong>Świecący kryształ</strong>. „Weź go proszę. Kryje się w nim niezwykła moc i potężne, ukryte światło. Na pewno ci pomoże, gdy na twojej drodze stanie twarda, ciemna i nieprzenikniona przeszkoda!”</p>
+    <div class="parent"><p>(POCHWAL DZIECKO) Cudownie to @${wymyśliłeś/wymyśliłaś}. Posmarowanie kółek śliską mazią było bardzo pomysłowe. Przy okazji @${dostałeś/dostałaś} kryształ mocy. Dobrze jest pomagać innym, nie?</p></div>
+    <p>@#MIAN @${pożegnał/pożegnała} się ze Śmigaczem i @${ruszył/ruszyła} dalej wąskim, kamiennym korytarzem.</p>
+
+    <h2>🔀 Skrzyżowanie u stóp góry</h2>
+    <p>Dalszy marsz był monotonny, kręty korytarz wił się w nieskończoność, aż w końcu doprowadził @#BIER do ogromnej, monumentalnej jaskini. Na jej przeciwległym końcu znajdowało się wielkie wyjście na zewnątrz, z którego roztaczał się niesamowity widok. To tutaj, w sercu wielkiej skały, droga nagle się rozwidlała, stawiając przed małym wędrowcem niezwykły wybór.</p>
+
+    <p>Pierwsza ścieżka prowadziła prosto na zewnątrz. Stojąc u progu tej drogi, @#MIAN mógł poczuć łagodny powiew wiatru i piękny, świeży zapach zielonej trawy. Ścieżka wiła się łagodnie w dół, zapraszając do wędrówki przez rozległe, pełne życia polany, szumiące lasy i lśniące, błękitne jeziora, nad którymi śpiewały ptaki. Ta droga obiecywała spokojną i pełną naturalnego piękna przygodę.</p>
+
+    <p>Druga ścieżka skręcała gwałtownie prowadząc w nieznane głębiny góry. Korytarz był mroczny i tajemniczy, ale wcale nie wydawał się straszny – ściany tunelu były usiane tysiącami maleńkich, kolorowych kryształów, które w ciemności lśniły i mieniły się niczym najprawdziwsze gwiazdy na nocnym niebie. Gdzieś z daleka dobiegał stłumiony, intrygujący szum podziemnych wodospadów. Ta ścieżka szeptała o wielkich sekretach w tajemniczych wnętrzach góry.</p>
+    <p><em>Którą ścieżką chcesz iść dalej @#W?</em></p>
+
+    <button class="btn btn-choice" onclick="switchScreen('screen-akt2-podziemia', 'screen-akt3-polany', 'var(--bg-las)', ['kryształMocy'])">🌳 Wychodzę na powierzchnię i idę ścieżką w stronę polan i jezior.</button>
+    <button class="btn btn-choice" onclick="switchScreen('screen-akt2-podziemia', 'screen-akt3-gory', 'var(--bg-gory)', ['kryształMocy'])">🪨 Idę dalej mroczną ścieżką i sprawdzam co kryją wnętrza góry.</button>
+	</div>
+
+    <!-- ================================================================= -->
+	<!-- EKRAN 6: AKT III - ŚCIEŻKA PRZEZ POLANY                           -->
+	<!-- ================================================================= -->
+	<div id="screen-akt3-polany" class="screen">
+    <p>@#MIAN śmiało @${skierował/skierowała} swoje kroki ku dalszej przygodzie z nadzieją że uda @${mu/jej} się pomóc Królestwu. Ścieżka zaczęła prowadzić wśród przepięknych, rozległych polan pełnych pachnących, dzikich kwiatów. Niestety, z czarnej chmury Złej Królowej wciąż siąpił chłodny deszcz, a małe kwiatuszki smętnie tuliły swoje kolorowe płatki do mokrej ziemi.</p>
+    <p>Nagle, na samym środku zielonej łąki, do uszu @#DOP dobiegło ciche, bardzo smutne popiskiwanie: <em>„Piiii, piiik…”</em>. To był mały Dzięcioł. Siedział bezradnie na kępce miękkiego mchu i smętnie zwieszał swoje prawe skrzydełko, które najwyraźniej było uszkodzone. @#MIAN natychmiast @${ukląkł/uklękła} przy rannym ptaszku. Szybko @${wyjął/wyjęła} ze swojej torby miękką, kolorową chustkę, otrzymaną na samym początku podróży od Skrzata. Ostrożnie @${owinął/owinęła} skrzydełko dzięcioła, robiąc z chustki mięciutki opatrunek. Ptaszek od razu poczuł wielką ulgę! Usiadł wygodnie na ramieniu dziecka a @#MIAN @${postanowił/postanowiła} zabrać go ze sobą.</p>
+    
+    <h2>Spotkanie ze Starym Entem</h2>
+    <p>Po dłuższym marszu dotarli nad brzeg ogromnego, spokojnego jeziora, którego woda lśniła w półmroku. Przy samym brzegu stało niezwykłe, potężne i prastare drzewo – Stary Ent. Drzewo głośno wzdychało, a jego potężne, liściaste konary trzęsły się i skrzypiały.</p>
+    <p>„Achhh... Ochhh... Jak to strasznie boli...” – zawołał prastary Ent, spoglądając na nowo przybyłego gościa swoimi mądrymi oczami ukrytymi w korze. „Witaj, mały wędrowcze. Jestem strażnikiem tego jeziora. Niestety, dzisiaj nie mogę pilnować porządku... Pod moją grubą korę wkradły się złośliwe korniki! Gryzą mnie i dokuczają tak mocno, że nie mogę spać, a moje potężne korzenie słabną. Sam nie potrafię ich wygonić, bo moje palce z grubych gałęzi są na to zbyt niezdarne...”</p>
+    <p>Mały Dzięcioł na ramieniu @#DOP ożywił się i głośno zaświergotał delikatnie stukając @${go/ją} dziubkiem w ramię. @#MIAN @${zrozumiał/zrozumiała} o co chodzi i @${podsadził/podsadziła} go wysoko na pień Enta. Dzięcioł natychmiast zaczął dziobać w korę: <em>„Stuk-stuuuk! Puk-puuuk!”</em>. Po kilku minutach korniki uciekły gdzie pieprz rośnie, a Dzięcioł zamieszkał w gałęziach Enta, by strzec go przed owadami.</p>
+    <p>„Och, cóż za ulga! Dziękuję wam, wspaniali przyjaciele!” – zawołał uradowany Ent. Drzewo pochyliło się nisko i podało niewielki przedmiot. „W nagrodę za pomoc, weź ten kawałek mojej <strong>Magicznej kory</strong>. Gdy rzucisz ją na wodę, drzemiące w niej niezwykłe właściwości sprawią, że zamieni się w pewny most i  bez trudu będziesz @${mógł/mogła} przejść  przez każdą, nawet najgłębszą wodę”.</p>
+    
+    <h2>Spotkanie z Leśną Babcią</h2>
+    <p>Wędrując dalej raźnym krokiem wzdłuż brzegu, @#MIAN @${zauważył/zauważyła} idącą z naprzeciwka starszą kobietę – Leśną Babcię. Babunia ubrana była w stare zniszczone już dość mocno ubrania. Na głowie miała chustkę w kwieciste wzory, na nogach mocno zniszczone buty a na plecach wielki, ciężki pęk chrustu na opał. Wiązka drewna była tak ciężka, że Babcia co kilka kroków musiała siadać na przydrożnych kamieniach i masować zmęczone nogi. Chrust powiązany był grubą, szorstką liną. </p>
+    <p><em>Czy zechcesz mi pomóc zacny wędrowcze?</em> Zapytała babunia.</p>
+    <p class="italic">@#W, czy pomożesz zmęczonej Leśnej Babci dźwigać ten ciężki chrust do jej domku?</p>
+
+    <button class="btn btn-choice" onclick="switchScreen('screen-akt3-polany', 'screen-akt3-babcia-tak', null, ['maKore', 'pomagaBabci'])">🪢 Pomagam Leśnej Babci i niosę chrust aż do jej chatki.</button>
+    <button class="btn btn-choice" onclick="switchScreen('screen-akt3-polany', 'screen-akt3-babcia-nie', null, ['maKore'])">🚶 Śpieszę się i idę dalej swoją drogą.</button>
+	</div>
+
+    <!-- ================================================================= -->
+	<!-- EKRAN 6: AKT III - ŚCIEŻKA PRZEZ GÓRY                             -->
+	<!-- ================================================================= -->
+	<div id="screen-akt3-gory" class="screen">
+    <h2>Spotkanie z Yeti</h2>
+    <p></p>
+    <p>Wnętrze potężnej jaskini od razu otoczyło małego wędrowca głębokim mrokiem i tajemniczą ciszą. Chłodne, wilgotne powietrze niosło ze sobą zapach przygody, a pod stopami cicho chrupały drobne kamyczki. Od czasu do czasu od sufitu odrywała się kropla wody, wpadając z głośnym, czystym pluskiem do maleńkich, podziemnych jeziorek. Kolo idąc naprzód, musiał mocno uważać na śliskie podłoże i wielkie, wiekowe stalagmity, które wyrastały z ziemi niczym kamienne kły potężnego smoka.</p>
+    <p>Gdzieś z głębi jaskini dochodził ledwie słyszalny pomruk. Im dłużej @#MIAN @${szedł/szła}, tym pomruk stawał się głośniejszy i wyraźniejszy. Korytarz zaczął się robić szerszy i wkrótce zamienił się w obszerną komorę.</p>
+    <p>Teraz pomruk stał się potężnym, basowym rykiem. Kamienie aż trzęsły się pod nogami. Choć @#CEL serce zabiło mocniej, @${postanowił/postanowiła} sprawdzić co powoduje ten hałas.
+    Gdy ostrożnie @${wyjrzał/wyjrzała} zza skalnego załomu, @${zobaczył/zobaczyła} ogromną, pokrytą białym i gęstym futrem postać. To był prawdziwy górski Yeti! Wielki stwór siedział na kamieniu, a jego potężna sylwetka rzucała olbrzymi, groźny cień na ściany jaskini. Wyglądał na niesamowicie silnego – jego wielkie, kosmate łapy mogłyby bez trudu skruszyć najtwardszą skałę, a basowe echo jego potężnego głosu wciąż wibrowało w powietrzu, mrożąc krew w żyłach.
+    Jednak gdy @${chłopiec/dziewczynka} @${przyjrzał/przyjrzała} się bliżej, groza natychmiast minęła. Ten potężny olbrzym tulił do siebie swoją wielką stopę, kołysał się smutno z boku na bok i od czasu do czasu ryczał cicho z bólu, a z jego wielkich, mądrych oczu kapały łzy wielkości leśnych poziomek. Gdy olbrzym zauważył @#BIER, nie zaatakował. Zamiast tego wyciągnął w @${jego/jej} stronę swoją wielką stopę i cicho, żałośnie jęknął, jakby całym sobą prosił małego wędrowca o ratunek. Pomimo lęku @#MIAN @${podszedł/podeszła} bliżej i @${przyjrzał/przyjrzała} się kosmatej stopie. Tkwiła w niej spora, ostra drzazga, ale duże i grube palce Yeti nie były w stanie jej uchwycić.</p>
+    <p>Nie czekając ani chwili @${złapał/złapała} drzazgę, szybko i mocno @${szarpnął/szarpnęła} i @${wyrwał/wyrwała} ją zanim Yeti zdążył zareagować.</p>
+    <p>Zaskoczony futrzak przez chwilę siedział zdezorientowany i patrzył raz na stopę, a raz na @#BIER. Kiedy w końcu dotarło do niego, co się stało, dotknął kilka razy miejsca, w którym wcześniej tkwiła drzazga, stanął na nogach, a po chwili podskoczył z radości tak mocno, że ze stropu jaskini posypał się skalny pył! Zaczął głośno, głęboko mruczeć z zadowolenia, a dźwięk ten przypominał mruczenie gigantycznego, szczęśliwego kota.</p>
+    <p>W przypływie ogromnej wdzięczności olbrzym podszedł do ukrytego w ścianie jaskini skalnego schowka. Wyciągnął z niego stare, puszyste futerko i z wielką delikatnością, niemal z szacunkiem, wręczył je @#CEL. @${Chłopiec/Dziewczynka} od razu @${poczuł/poczuła}, że to niezwykły dar – futerko było tak miękkie, jakby utkano je z chmur, i emanowało przyjemnym, kojącym ciepłem. Było jasne, że potrafi ono ogrzać wędrowca nawet w trakcie największych mrozów i najgorszej górskiej zamieci. W oczach Yeti malowała się teraz czysta, głęboka radość. Stwór skinął wielką głową na pożegnanie, klepnął delikatnie @#BIER w plecy na znak prawdziwej przyjaźni i potuptał szczęśliwy w głąb bocznego korytarza.</p>
+    <div class="parent"><p>Pomaganie innym daje radość, prawda? Zobacz, teraz masz nowego przyjaciela i wspaniały dar.</p></div>
+
+    <p>Wąski, kamienny korytarz jaskini piął się stromo w górę, aż w końcu przed oczami wędrowca pojawiła się mała szczelina, przez którą wpadało jasne, mroźne światło. @#MIAN śmiało @${przekroczył/przekroczyła} ten próg i @${wszedł/weszła} prosto w świat potężnych, ośnieżonych szczytów.</p>
+    <p>Wiatr dmuchał tu niezwykle mocno, a w powietrzu tańczyły miliony białych płatków śniegu. Na szczęście @${nasz/nasza} @${mały/mała} @${podróżnik/podróżniczka} @${miał/miała} na sobie puszyste, niesamowicie ciepłe i miłe futerko, które @${otrzymał/otrzymała} w jaskiniach od wdzięcznego Yeti za pomoc w wyciągnięciu wielkiej, ostrej drzazgi z jego kudłatej stopy. Szybko się nim @${opatulił/opatuliła}, a przenikliwy mróz przestał być straszny!</p>
+
+    <p>Wędrując wąską przełęczą, krok za krokiem, @#MIAN dotarł na sam szczyt najwyższej, lodowej skały. Tutaj zła magia Królowej była niemal wyczuwalna w powietrzu. Niebo nad głową miało barwę ciemnego ołowiu, a przenikliwy, lodowaty wiatr ryczał niczym dzika bestia, smagając nagie zbocza i rzucając w oczy tumany ostrego śniegu. Każdy podmuch niósł ze sobą arktyczny chłód, przed którym nie było się gdzie schować.</p>
+    <p>Na samym skraju przepaści, wystawione na wściekłe uderzenia wichury, znajdowało się ogromne gniazdo utkane z suchych, twardych gałęzi i zmarzniętego mchu. To w nim siedział potężny Skalny Orzeł. Ptak miał dumne, bystre oczy, ale jego wielkie, majestatyczne skrzydła opadły ze skrajnego zmęczenia, a pióra pokrył szron. Nie mógł opuścić gniazda nawet na krok, ponieważ musiał bez przerwy ogrzewać duże, białe jajko, chroniąc je przed zamarznięciem. Przez to był już potwornie głodny i spragniony, a jego siły były już na wyczerpaniu.</p>
+
+    <p>Orzeł spojrzał na bohatera mądrym, głębokim wzrokiem i słabym głosem zawołał: „Och, mały człowieku... Jestem tak potwornie osłabiony. Muszę pilnie polecieć w doliny, by pożywić się i napić wody z potoku, ale ten lodowaty wiatr sprawi, że moje jajko zamarznie w kilka chwil...”</p>
+
+    <p>„Leć spokojnie i odpocznij, zaopiekuję się twoim jajkiem!” – pomyślał głośno i zawołał wesoło nasz mały wędrowiec. @#MIAN @${podszedł/podeszła} bardzo ostrożnie do gniazda. Gdy tylko Orzeł z wielką ulgą wzbił się w chmury, bohater schował duże, gładkie jajko głęboko pod swoje ubranie, tuląc je mocno do ciepłego brzuszka i osłaniając puszystym futrem od Yeti. Lodowaty wiatr szalał wokół nich, ale pod osłoną grubego futerka jajko było całkowicie bezpieczne i ogrzewane miłością @${małego/małej} @${bohatera/bohaterki}.</p>
+
+    <p>Po dłuższym czasie Skalny Orzeł wrócił z doliny – silny, najedzony i pełen nowej energii. @#MIAN delikatnie wysunął jajko z powrotem do gniazda. W tym samym ułamku sekundy – puk, puk, chrup! – na białej skorupce pojawiło się małe pęknięcie. Po chwili wyjrzał z niego śliczny, puszysty dzióbek, a na świat wykluł się mały orzełek! Stary ptak zaszumiał skrzydłami z ogromnej radości i z miłością przytulił swoje maleństwo.</p>
+    <p>Orzeł pochylił się niziutko przed naszym wędrowcem i z wielką wdzięcznością podarował @${mu/jej} swoje największe, lśniące, śnieżnobiałe orle pióro: „To niezwykłe pióro ma w sobie zaklętą moc górskiego wiatru. Drzemie w nim tajemnica, która uniesie twoje ciało i pozwoli ci bezpiecznie przefrunąć nad każdą, nawet najszerszą przeszkodą na drodze, gdy tylko uniesiesz je wysoko nad głową!”</p>
+
+    <p>Z śnieżnobiałym piórem w dłoni i z uśmiechem na twarzy, @#MIAN @${pożegnał/pożegnała} się z wdzięczną orlą rodziną i @${zaczął/zaczęła} schodzić ze stromego, mroźnego szczytu. Z każdym krokiem w dół wiatr cichł, a powietrze stawało się cieplejsze. Wkrótce ścieżka wyprowadziła @${go/ją} w pobliże wielkiego, zielonego wzgórza. Gdy @#MIAN @${spojrzał/spojrzała} przed siebie, aż zaparło @${mu/jej} dech w piersiach – daleko na horyzoncie, spod kłębów czarnych chmur, rysowały się ledwie widoczne strzeliste wieże zamku, w którym teraz panoszyła się zła królowa. Cel podróży był coraz bliżej! @${Chłopiec/Dziewczynka} @${wiedział/wiedziała}, że musi tylko dojść do wzgórza, które było drogą do wrót warowni. @${Ruszył/Ruszyła} raźno przed siebie, czując, że jest już o krok od uratowania całego królestwa.</p>
+
+	<button class="btn" onclick="switchScreen('screen-akt3-gory', 'screen-spotkanieTrolla', 'var(--bg-las)', ['maPioro', 'Yeti'])">Wchodzimy na ostatnie wzgórze.</button>
+	</div>
+
+    <!-- ================================================================= -->
+	<!-- EKRAN 7: AKT III CZ 2 - ŚCIEŻKA PRZEZ POLANY / BABCIA - TAK       -->
+	<!-- ================================================================= -->
+	<div id="screen-akt3-babcia-tak" class="screen">
+    <p>@#MIAN od razu @${podbiegł/podbiegła} do babuni. Szybko i delikatnie @${zdjął/zdjęła} ciężki pęk z jej pleców, po czym @${zarzucił/zarzuciła} tę wielką wiązkę z chrustem na swoje drobne, ale silne ramiona i pomimo ogromnego trudu wytrwale @${niósł/niosła} ją przed siebie.<br>Wiązka szorstkich gałęzi była naprawdę ciężka, a drewniane patyki boleśnie wpijały się w ramiona, jednak @${mały/mała} @${bohater/bohaterka} ani @${myślał/myślała} narzekać. Krok za krokiem, ramię w ramię z Babcią, @${przemierzał/przemierzała} kręte, leśne ścieżki. Staruszka, widząc determinację @${chłopca/dziewczynki}, co chwilę gładziła @${go/ją} czule po głowie i opowiadała cichym, ciepłym głosem o dawnych czasach, gdy las był jeszcze pełen słonecznego blasku. Tuż obok nich, z podniesionym dumnie ogonkiem, raźno dreptał kotek Mruczek. Od czasu do czasu ocierał się puszystym boczkiem o nóżki @#DOP i cichutko mruczał, jakby chciał dodać @${mu/jej} sił w tej trudnej wędrówce.<br>
+    Wędrowali tak przez dłuższą chwilę pod osłoną potężnych, prastarych dębów, które swoimi gęstymi koronami chroniły ich przed rzęsistym deszczem Złej Królowej. W powietrzu unosił się piękny zapach mokrej ściółki, mchu i leśnych grzybów. Choć droga pod górę dłużyła się i wymagała niemałego wysiłku, miła rozmowa i raźne towarzystwo sprawiły, że zmęczenie schodziło na dalszy plan. W końcu, gdy las zaczął się powoli przerzedzać, zza gęstych zarośli dzikiej róży wyłoniła się mała, niezwykle przytulna chatka z drewnianych bali, stojąca na skraju uroczej polany. Staruszka uśmiechnęła się ciepło, usiadła z ulgą na drewnianej ławeczce przed domem, a na jej kolana natychmiast wskoczył Mruczek.</p>
+
+    <p>„Dziękuję ci, moje drogie dziecko!” – powiedziała z miłością w głosie. „W nagrodę weź tę linę, którą był związany chrust. Pamiętaj: To jest niezwykła lina, w której drzemie wielka, ukryta tajemnica. Jeśli spotka cię jakieś niebezpieczeństwo, musisz wypowiedzieć zaklęcie i rzucić ją mocno za siebie. Powtórz je teraz za mną wędrowcze, aby dobrze je zapamiętać!”</p>
+
+    <p class="italic">@#W, spróbujmy powtórzyć te słowa razem z Babcią! Najpierw ja przeczytam, a Ty powtórz i postaraj się zapamiętać zaklęcie:</p>
+
+    <p class="magic" style="font-weight: bold; display: block; text-align: center; font-size: 18px; margin: 20px 0; color: #2b7a4b;">„Babuleńki lino miła,<br>daj by tu się rzeka wiła!”</p>
+
+    <p>Pamiętaj, ta lina potrafi zamienić się w szeroką i głęboką rzekę, która oddzieli cię od każdego zagrożenia!</p>
+
+    <div class="parent"><p>Cudownie że @${pomogłeś/pomogłaś} babuni! Twoje dobre serduszko przyniosło babuni ulgę i spowodowało że masz teraz tę wspaniałą linę @${mój/moja} @${mały/mała} @${przyjacielu/przyjaciółko}.</p></div>
+
+    <button class="btn" onclick="switchScreen('screen-akt3-babcia-tak', 'screen-akt4-dziewczynka', 'var(--bg-las)')">Ruszajmy dalej.</button>
+	</div>
+
+    <!-- ================================================================= -->
+	<!-- EKRAN 7: AKT III CZ 2 - ŚCIEŻKA PRZEZ POLANY / BABCIA - NIE       -->
+	<!-- ================================================================= -->
+	<div id="screen-akt3-babcia-nie" class="screen">
+    <p>@#MIAN z wielkim smutkiem @${spojrzał/spojrzała} na zmęczoną staruszkę, ale czarne chmury Złej Królowej wiszące nad królestwem przypomniały @${mu/jej} o ważnej misji. „Przepraszam Cię, Babuniu, bardzo @${chciałbym/chciałabym} ci pomóc, ale muszę się spieszyć, by ratować nasz dom przed złą magią!” – @${zawołał/zawołała} pośpiesznie @${nasz/nasza} @${bohater/bohaterka}. Leśna Babcia skinęła ze zrozumieniem głową i odpowiedziała ciepłym, choć nieco drżącym głosem: „Idź bezpiecznie, dzielny wędrowcze, niech przeznaczenie prowadzi Twoje kroki”.</p>
+
+    <p>@#MIAN @${ruszył/ruszyła} raźno przed siebie, zostawiając Babcię i jej kotka Mruczka w tyle. Droga bez leśnych wskazówek staruszki stawała się jednak o wiele trudniejsza. Rzęsisty deszcz zaczął zalewać szlak, a gliniasta ścieżka bardzo szybko zamieniła się w śliskie, zdradliwe błoto, na którym stopy bez przerwy traciły oparcie. @#MIAN @${musiał/musiała} teraz polegać wyłącznie na własnych siłach i bystrym wzroku, mocno wypatrując drogi wśród prastarych, nieznanych drzew.</p>
+
+    <div class="parent"><p>Szkoda, że nie @${mogłeś/mogłaś} pomóc Leśnej Babci, ale czasami misja i pośpiech zmuszają nas do trudnych wyborów. Ruszamy w dalszą drogę @${mój mały przyjacielu/moja mała przyjaciółko}! Pamiętaj, aby w dalszej drodze bardzo uważać na niebezpieczeństwa i mocno wytężać wzrok – Twój spryt i bystre oko będą teraz jedynym ratunkiem, jeśli na szlaku spotka Cię coś groźnego!</p>
+    </div>
+
+    <button class="btn" onclick="switchScreen('screen-akt3-babcia-nie', 'screen-akt4-dziewczynka', 'var(--bg-las)')">Ruszam szybciutko w dalszą drogę.</button>
+    </div>
+
+
+    <!-- ================================================================= -->
+	<!-- EKRAN 8: AKT IV - DZIEWCZYNKA                                     -->
+	<!-- ================================================================= -->
+	<div id="screen-akt4-dziewczynka" class="screen">
+    <p>@#MIAN śmiało @${skierował/skierowała} swoje kroki dalej, wędrując krętą ścieżką, która powoli opuszczała gęstwinę drzew. Szum deszczu uderzającego o liście zaczął mieszać się z zupełnie nowym odgłosem – miarowym, spokojnym pluskiem wody. Po kilku minutach marszu las się otworzył, a przed oczami podróżnika rozciągnął się widok na ogromne, spowite mgłą jezioro. Wzdłuż brzegu wiodła piaszczysta dróżka, na której woda tworzyła lśniące kałuże.</p>
+    
+    <p>Idąc wzdłuż brzegu, @#MIAN @${dotarł/dotarła} do miejsca, gdzie nad samą wodą rosła potężna, płacząca wierzba. Jej długie, wiotkie gałęzie opadały kaskadami w dół, dotykając gładkiej tafli jeziora i tworząc zielone, bezpieczne i suche schronienie. Gdy @#MIAN @${podszedl/podeszła} bliżej i delikatnie @${rozchylił/rozchyliła} dłońmi cienkie gałązki, by zajrzeć pod liście, natychmiast @${zauważył/zauważyła} małą dziewczynkę. Siedziała na wilgotnym kamieniu, bardzo smutna, tuląc kolana mocno do brody. Wyglądała na skrajnie wyczerpaną, a jej mały brzuszek głośno burczał: <em>„Burrr, burrr...”</em>.</p>
+    
+    <p>@%{maJagody|<em>@#W, spójrz na tę biedną dziewczynkę, jest bardzo głodna. Na szczęście Twoje dobre serce sprawiło, że @${pomogłeś/pomogłaś} wcześniej Skrzatowi i masz w swojej torbie pyszne, leśne jagody, które od niego @${dostałeś/dostałaś}.</em><br>
+    @#MIAN nie @${zastanawiał/zastanawiała} się ani chwili, @${wyciągnął/wyciągnęła} z torby jagody i @${wsypał/wsypała} je w malutkie, otwarte dłonie dziewczynki. Mała Anusia z wielkim zachwytem zaczęła pałaszować słodkie jagody, a na jej buzi pojawił sie przepiękny, radosny uśmiech. Zjadła wszystko do ostatniego owocu, po czym otarła rączką umorusaną buzię. Anusia podziękowała i życzyła @#CEL bezpiecznej podróży. |<em>@#W, szkoda że nie masz czym poczęstować dziewczynki. Może gdybyś @${pomógł/pomogła} skrzatowi dźwigać kosz z jagodami to by się z Tobą podzielił.</em> @#MIAN @${pocieszył/pocieszyła} dziewczynkę i @${przytulił/przytuliła} ją mocno. Ponieważ nie @${miał/miała} nic, czym @${mógłby/mogłaby} ją poczęstować @${wskazał/wskazała} kierunek do niewielkiej polany na której @${widział/widziała} rosnące poziomki. Pyszne i soczyste poziomki na pewno pomogą zaspokoić głód i poprawią jej humor.} </p>
+
+    <p>Po pożegnaniu z małą Anusią, @#MIAN @${ruszył/ruszyła} w dalszą drogę z lekkim sercem i uśmiechem na twarzy. Przez kolejne dni @${maszerował/maszerowała} niestrudzenie, mijając szumiące gaje, bystre strumyki i wysokie, zielone wzgórza, które powoli ustępowały miejsca znajomym krajobrazom. Wędrowanie trwało już bardzo długo, a zmęczenie dawało się we znaki, jednak cel podróży był blisko. Pewnego dnia, gdy słońce zaczęło powoli wstawać nad horyzontem, malując niebo odcieniami złota i różu, na szczycie najwyższej góry w oddali zamigotały strzeliste wieże królewskiego zamku. Do bezpiecznych wrót warowni nie zostało już naprawdę daleko, a serce @#DOP mocniej zabiło z radości na widok końca tej niezwykłej przygody.</p>
+
+    <button class="btn" onclick="switchScreen('screen-akt4-dziewczynka', 'screen-spotkanieTrolla')">Ruszamy dalej.</button>
+    </div>
+
+    <!-- ================================================================= -->
+	<!-- EKRAN 9: AKT V - SPOTKANIE Z TROLLEM                              -->
+	<!-- ================================================================= -->
+	<div id="screen-spotkanieTrolla" class="screen">
+    <p>Gdy @${nasz/nasza} @${mały/mała} @#MIAN @${wdrapał/wdrapała} się na sam szczyt kamiennego wzniesienia z gęstej mgły wyłonił się niepokojący widok. Przed sobą @${zobaczył/zobaczyła} potężny, stary, drewniany most rozciągnięty nad głęboką przepaścią. Na samym środku mostu, opierając się o wielką maczugę, stał ogromny, warczący Troll o zielonej skórze i wielkich uszach. Każde jego stąpnięcie sprawiało, że małe kamyczki drżały na ścieżce. Przejście obok takiego wielkoluda wydawało się zupełnie niemożliwe!</p>
+    <p>Widząc to groźne stworzenie, @#MIAN błyskawicznie @${ukrył/ukryła} się za ogromnym, szarym głazem stojącym tuż przy drodze, byle tylko potwór @${go/jej} nie zauważył. Serduszko naszej postaci biło jak szalone.</p>
+    
+    <p>Nagle, zza gęstych zarośli, na kolorowej deskorolce z głośnym szumem kółek wyjechała mała, uśmiechnięta dziewczynka o imieniu Natalka. Wspierała się na specjalnych kulach, ale radziła sobie z nimi niesamowicie sprawnie! Spojrzała na wystraszonego wędrowca schowanego za kamieniem i szepnęła raźno: „Cześć! Jestem Natalka. Widzę, że chyba chcesz przejść przez ten most - rzekła. Taaak, ten Troll nie ułatwia nikomu podróży. Nie przejmuj się, znam sposób na niego. Zrobię na swojej deskorolce kilka trików, narobię hałasu i odwrócę uwagę tego wielkoluda, a Ty wtedy pędź przed siebie!”</p>
+    <p>Natalka z głośnym okrzykiem wjechała prosto na most, kręcąc bączki i robiąc hałas. Rozwścieczony Troll natychmiast ruszył w jej stronę. @#MIAN @${wykorzystał/wykorzystała} tę krótką chwilę i jak błyskawica @${przebiegł/przebiegła} przez drewniane deski! Niestety, potężny Troll szybko zauważył podstęp. Odwrócił się na pięcie, głośno zaryczał i zaczął gonić naszego małego bohatera! Wielkie kroki Trolla dudniły o ziemię: <em>„TUP! TUP! TUP!”</em>.
+    Trolle potrafią naprawdę szybko biegać i już po chwili @#MIAN @${słyszał/słyszała} za plecami jego głośny i sapiący oddech.</p>
+
+    <p>@%{pomagaBabci|Sytuacja zrobiła się groźna, ale @#MIAN @${przypomniał/przypomniała} sobie o magicznej linie otrzymanej od leśnej Babuni. Błyskawicznie @${sięgnął/sięgnęła} do torby, @${wyciągnął/wyciągnęła} z niej linę, @${rzucił/rzuciła} ją mocno za siebie, prosto pod nogi goniącego @${go/ją} Trolla i cichutko, szpetem @${wypowiedział/wypowiedziała} zapamiętane zaklęcie:<br><br><strong>Poproś dziecko aby wypowiedziało z Tobą słowa zaklęcia:</strong><br><span class="magic" style="font-weight: bold; display: block; text-align: center; font-size: 18px; margin: 20px 0;">"Babuleńki lino miła,<br>daj by tu się rzeka wiła."</span>W tym samym ułamku sekundy stał się prawdziwy cud! Lina dotknęła ziemi i z głośnym, ryczącym szumem zamieniła się w szeroką, niesamowicie głęboką rzekę o rwącym nurcie! Rozwścieczony Troll zatrzymał się gwałtownie na samym brzegu, machając bezradnie wielkimi łapami i rycząc ze złości. Wielka woda całkowicie odcięła pościg i @#MIAN mógł spokojnie ruszyć w kierunku zamku.|@#MIAN @${zachował/zachowała} zimną krew i @${wykorzystał/wykorzystała} swój spryt, zauważył małą, wąską szczelinę ukrytą między dwiema potężnymi skałami. Błyskawicznie się @${wślizgnął/wślizgnęła} w skalny zakamarek zwinnie przeciskając się między kamieniami. Wielki, niezdarny Troll pędził tak szybko, że nie zdążył wyhamować - z głośnym <em>"ŁUBUDU"</em> uderzył głową w twardą skałę, aż zatańczyły nad nim małe gwiazdki!. Potwór usiadł na ziemi, masując się po wielkim nosie, a @#MIAN @${wymknął/wymknęła} się zostawiając zagrożenie w tyle.}</p>
+    <button class="btn" onclick="switchScreen('screen-spotkanieTrolla', 'screen-zamek')">Ruszamy dalej.</button>
+    </div>
+
+    <!-- ================================================================= -->
+	<!-- EKRAN 10: AKT VI - ZAMEK                                          -->
+	<!-- ================================================================= -->
+	<div id="screen-zamek" class="screen">
+    <!-- Sekcja dla Pióra Orła -->
+    <p>@%{maPioro|Gdy @#MIAN @${stanął/stanęła} przed potężnymi murami zamczyska, drogę do bramy odcięła @${mu/jej} głęboka, mroczna fosa pełna lodowato zimnej wody. Przejście wydawało się niemożliwe, lecz wtedy @${przypomniał/przypomniała} sobie o podarunku od Górskiego Orła. Z głębi torby @${wyciągnął/wyciągnęła} lśniące, śnieżnobiałe pióro orła, które w tej samej chwili zaczęło emanować ciepłym, jasnym blaskiem. Wokół bohatera zerwał się łagodny, magiczny wiatr. Nim @#MIAN @${zdążył/zdążyła} pomyśleć, co się dzieje, stopy @${oderwały/oderwały} się od ziemi, a niewidzialne, powietrzne skrzydła z wielką lekkością przeniosły @${go/ją} ponad zimną tonią, bezpiecznie stawiając tuż pod samym murem zamku.|}</p>
+
+    <!-- Sekcja dla Kory Enta -->
+    <p>@%{maKore|Przed @#NARZ wyrosła przedostatnia, przeszkoda – ogromna, zdradliwa fosa, której lodowate wody z głośnym szumem uderzały o kamienne mury zamku. @#MIAN @${wiedział/wiedziała}, że nie zdoła jej przeskoczyć, dlatego z nadzieją @${sięgnął/sięgnęła} po chropowaty, pachnący lasem kawałek kory pradawnego Enta. Gdy tylko @${wrzucił/rzuciła} go wprost we wzburzone fale, woda natychmiast ucichła. Kora zaczęła gwałtownie rosnąć, wypuszczając splatające się ze sobą, potężne korzenie i zielone pędy. W ciągu kilku sekund, na oczach @${zdumionego/zdumionej} @${bohatera/bohaterki}, nad fosą uformował się żywy, bezpieczny most z pachnącego drewna, usłany miękkim mchem. Och, jak dobrze że @${pomogłem/pomogłam} Entowi - @${pomyślał/pomyślała} @#MIAN. Dzięki temu że @${poświęciłem/poświęciłam} chwilę na pomoc, teraz mam wygodną drogę i most @${pomyślał/pomyślała}. Po czym z radością @${przebiegł/przebiegła} na drugą stronę.|}</p>
+
+    <!-- Sekcja dla Sękatego Kija od Rudzika -->
+    <p>@%{sękatyKij|Gdy fosa została w tyle, przed @#NARZ wyrosła ostatnia twarda przeszkoda – gigantyczny, gładki mur obronny z szarych, ciosanych kamieni, sięgający wysoko, bardzo wysoko. Wtedy @#MIAN @${przypomniał/przypomniała} sobie o Rudziku i z nadzieją @${wyciągnął/wyciągnęła} z torby sękaty kij. Gdy tylko @${oparł/oparła} go o chłodną ścianę, drewno nagle ożyło! Kij zaczął gwałtownie strzelać w górę, wypuszczając z bocznych sęków mocne, poprzeczne stopnie z litego dębu. W mgnieniu oka, z cichym trzaskiem pękającej magii, przed bohaterem uformowały się wysokie, stabilne schody, splecione z grubych gałęzi. @#MIAN bez trudu @${wspiął/wspięła} się po nich na sam szczyt muru, podziwiając z góry całą krainę, po czym lekko @${zeskoczył/zeskoczyła} na wewnętrzną stronę muru i @${zszedł/zeszła} schodami na zamkowy dziedziniec.|}</p>
+
+    <!-- Sekcja dla Kryształu Mocy od Śmigacza -->
+    <p>@%{kryształMocy|Za fosą wznosił się potężny, niedostępny mur obronny, na którym nie było widać ani jednej szczeliny. @#MIAN @${wiedział/wiedziała}, że nie zdoła się wdrapać po tak śliskich kamieniach. @${Uniósł/Uniosła} więc wysoko w górę mieniący się tęczowymi barwami Kryształ Mocy, który @${otrzymał/otrzymała} od wdzięcznego Śmigacza. Kamień nagle rozbłysnął oślepiającym, czystym światłem, a jego promienie dotknęły surowej ściany. Potężne głazy zaczęły cicho i płynnie rozsuwać się na boki, niczym odsuwana kurtyna, a ze środka muru buchnęło ciepłe, złote światło. W murze otworzyło się bezpieczne, tajemne przejście, przez które @#MIAN z bijącym mocno sercem @${przeszedł/przeszła} prosto na dziedziniec zamku, a kamienie za @${nim/nią} natychmiast zamknęły się bezszelestnie.|}</p>
+
+    <p>Przeszkody zostały pokonane! Przed @#NARZ otwierają się wielkie, żelazne wrota prowadzące prosto do Sali Tronowej.</p>
+    <button class="btn" onclick="switchScreen('screen-zamek', 'screen-zamekFinał', 'var(--bg-wioska)')">Czas na spotkanie z Czarną Królową.</button>
+    </div>
+
+    <!-- ================================================================= -->
+	<!-- EKRAN 10: AKT VI - ZAMEK FINAŁ                                      -->
+	<!-- ================================================================= -->
+	<div id="screen-zamekFinał" class="screen">
+    <p>Wielkie wrota otworzyły się z głośnym skrzypieniem, a @#MIAN śmiało @${wkroczył/wkroczyła} do Sali Tronowej. Na samym końcu komnaty, pod ścianą na wielkim tronie, siedziała Zła Królowa. W ręku trzymała czarodziejską różdżkę, z której bez przerwy kapały ponure krople deszczu. Gdy zobaczyła małego wędrowca, aż wstała zaskoczona! Zrozumiała, że nic nie zdołało powstrzymać kogoś o tak wielkim sercu.</p>
+    <p>@#MIAN @${podszedł/podeszła} bliżej, @${wyciągnął/wyciągnęła} rączki przed siebie i @${zaczął/zaczęła} głośno wypowiadać potężne, rymowane zaklęcie:</p>
+
+    <p class="italic">@#W, wypowiedzmy to magiczne zaklęcie razem! Ja będę czytać, a Ty powtarzaj:</p>
+    <p class="magic" style="text-align:center; font-size:18px;">
+    „Zła Królowo, ruszaj w drogę,<br>
+    żyć ci tutaj nie pomogę.<br>
+    Leć do Krainy Wiecznego Snu<br>
+    i nigdy więcej nie wracaj tu!”
+    </p>
+
+    <p>W tym samym ułamku sekundy czarodziejska różdżka pękła na milion małych kawałków, a Zła Królowa z głośnym okrzykiem zamieniła się w czarny dym i odleciała daleko za góry do krainy wiecznego snu! Przez wielkie witraże wpadł potężny, lśniący promień złotej energii, czarna chmura rozpłynęła się a nad całą krainą znowu zaświeciło przepiękne, ciepłe słońce!</p>
+    
+    <p>Tuż po tym zdarzeniu drzwi od bocznej komnaty otworzyły się i do sali wkroczył dobry Król Słonecznego Królestwa. Z wielkim wzruszeniem położył rękę na ramieniu dziecka i powiedział donośnym, ciepłym głosem: „Witaj, @#W! Moje ptaki doniosły mi o wszystkim, co wydarzyło się na szlaku. Wiem, że w trakcie swojej drogi:@%{maJagody|<br>– @${Pomogłeś/Pomogłaś} Skrzatowi w niesieniu ciężkiego kosza z jagodami.|}@%{sękatyKij|<br>– @${Pomogłeś/Pomogłaś} Rudzikowi naprawić kładkę w koronach drzew.|}@%{maKore|<br>– @${Opatrzyłeś/Opatrzyłaś} rannemu dzięciołowi zwichnięte skrzydełko.<br>– @${Pomogłeś/Pomogłaś} staremu Entowi pozbyć się uciążliwych korników.|}@%{pomagaBabci|<br>– @${Uratowałeś/Uratowałaś} z opresji leśną Babunię, pomagając jej dźwigać chrust.|}@%{kryształMocy|<br>– @${Nasmarowałeś/Nasmarowałaś} zardzewiałe kółka wózka Śmigacza.|}@%{Yeti|<br>– @${Wyciągnąłeś/Wyciągnęłaś} drzazgę ze stopy Yeti.|}@%{maPioro|<br>– @${Pomogłeś/Pomogłaś} Górskiemu Orłowi w opiece nad jajkiem.|}<br><br>Twoje dobre serce potrafi pokonać każdą złą magię, @${dzielny/dzielna} @${mały/mała} @${podróżniku/podróżniczko}! Całe królestwo dziękuje Ci za Twoją dobroć.”</p>
+
+    <div class="parent"><p>I tak oto, @#W, nasza wspólna przygoda dobiegła końca. Zła Królowa została pokonana, a w Słonecznym Królestwie znowu zapanowała radość. Stało się tak dzięki Twojej odwadze, ale przede wszystkim dzięki Twojemu wspaniałemu sercu.<br><br>
+    Pamiętasz skrzata i wszystkich innych, którym @${pomogłeś/pomogłaś}? Twoja chęć niesienia pomocy zmieniła ich świat na lepsze, a dobro, które @${podarowałeś/podarowałaś} innym, wróciło do Ciebie w najważniejszym momencie pod murami zamku. To najważniejsza magia, jaką dzisiaj @${odkryłeś/odkryłaś} – dobroć ma wielką moc.<br><br>
+    Twoje uczynki napawają moje serce dumą! Pamiętaj, że w prawdziwym świecie, poza stronami tej książeczki, Twoje małe i duże dobre uczynki również mają ogromne znaczenie. Każdego dnia możesz być @${takim/taką} @${wspaniałym/wspaniałą} @${bohaterem/bohaterką} dla kogoś wokół siebie. Dziękuję Ci za ten wspólny, magiczny czas!<br>
+    (PRZYTUL DZIECKO I POCHWAL JE)  </p></div>
+    <div><button class="btn" onclick="switchScreen('screen-zamekFinał', 'screen-form', 'var(--bg-las)')">Dziękujemy za wspólną przygodę.</button>
+    </div></div>
+
+	<!-- ================================================================= -->
+	<!-- EKRAN ??? : FORMULARZ KOŃCOWY                                     -->
+	<!-- ================================================================= -->
+    <div id="screen-form" class="screen">
+    <h1>🎉 Przygoda Zakończona! ☀️</h1>
+    <div class="author">Autor: SzyLinG</div>
+    <div style="background-color:#FFFDF0; border:1px dashed #D4A373; padding:15px; border-radius:8px; margin-bottom:25px;">Ankieta jest całkowicie <strong>dobrowolna</strong>. Pomóż nam stworzyć kolejną część! Być może w kolejnej przygodzie wykorzystamy imię, nazwę miasta lub inne wasze uwagi.</div>
+    <form action="https://formspree.io/f/xqpzkeyv" method="POST">
+    <label for="form-child-name">Imię dziecka:</label><input type="text" name="Imię dziecka" id="form-child-name">
+    <label for="form-city">Miejscowość:</label><input type="text" name="Miejscowość" id="form-city">
+    <label for="form-interests">Zainteresowania dziecka:</label><textarea name="Zainteresowania" id="form-interests" rows="2"></textarea>
+    <label for="form-features">Cechy szczególne:</label><textarea name="Cechy szczególne" id="form-features" rows="2"></textarea>
+    <label>Kolejny świat:</label>
+    <div class="radio-group">
+    <div class="radio-option"><input type="radio" name="Świat" value="Morze" id="w1" checked><label for="w1">🏴‍☠️ Morskie opowieści</label></div>
+    <div class="radio-option"><input type="radio" name="Świat" value="Kosmos" id="w2"><label for="w2">🚀 Kosmos</label></div>
+    <div class="radio-option"><input type="radio" name="Świat" value="Świat zwierząt" id="w3"><label for="w3">🕵️‍♂️ Świat zwierząt</label></div>
+    <div class="radio-option"><input type="radio" name="Świat" value="Dinozaury" id="w4"><label for="w4">🦖 Dinozaury</label></div>
+    </div>
+    
+    <!-- NOWE OKIENKO NA UWAGI I POMYSŁY -->
+    <label for="form-comments">Napisz kilka słów od siebie (Twoje uwagi lub pomysły dziecka):</label>
+    <textarea name="Uwagi i pomysły" id="form-comments" rows="3" placeholder="Co podobało się Wam najbardziej? Co możemy ulepszyć?"></textarea>
+
+    <button type="submit" class="btn">📧 WYŚLIJ PROPOZYCJE</button>
+    </form>
+    <button class="btn" style="background-color:#6B8E23;" onclick="resetStory()">🔄 ZACZNIJ OD NOWA (INNA ŚCIEŻKA)</button>
+    </div>
+</div> <!-- ZAMKNIĘCIE CONTAINER -->
+
+<script>
+
+
+    // =====================================================================
+    // 1. GLOBALNY STAN GRY ORAZ JEDNOLITY SŁOWNIK ODMIAN
+    // =====================================================================
+    let gameState = {
+        name: "", nameGenitive: "", nameDative: "", nameAccusative: "", nameAblative: "", nameLocative: "", nameVocative: "",
+        gender: "m",
+        uczynki: new Set()
+    };
+
+    function odmianaCzynnosci(tekst) 
+    {
+        // Wyrażenie regularne szuka wzorca @${słowo1/słowo2}
+        // ([^\/]+) łapie tekst przed ukośnikiem, a ([^}]+) tekst po ukośniku
+        const regex = /@\$\{([^\/]+)\/([^}]+)\}/g;
+        
+        return tekst.replace(regex, (match, slowoMeskie, slowoZenskie) => {
+            return gameState.gender === "m" ? slowoMeskie : slowoZenskie;
+        });
+    }
+
+    function odmienImie(text)
+    {
+        const dopasowanie = /@#(\w+)/g;
+
+        return text.replaceAll(dopasowanie, (znalezione,odm) => {
+            switch(odm)
+            {
+                case "MIAN": return gameState.name;
+                case "DOP": return gameState.nameGenitive;
+                case "CEL": return gameState.nameDative;
+                case "BIER": return gameState.nameAccusative;
+                case "NARZ": return gameState.nameAblative;
+                case "MIE": return gameState.nameLocative;
+                case "W": return gameState.nameVocative;
+                default: return "[BŁAD!]"
+            }
+        }) 
+    }
+
+    function sprawdzWarunkiUczynkow(tekst) 
+    {
+        // Wyrażenie regularne szuka wzorca @?{nazwaUczynku|tekstTak|tekstNie}
+        const regex = /@%\{([^|]+)\|([\s\S]*?)\|([\s\S]*?)\}/g;
+
+        return tekst.replace(regex, (match, uczynek, tekstTak, tekstNie) => {
+            // Sprawdzamy, czy w naszym Set znajduje się dany uczynek
+            return gameState.uczynki.has(uczynek.trim()) ? tekstTak : tekstNie;
+        });
+    }
+
+    // =====================================================================
+    // 2. FUNKCJE AKCJI I WYBORÓW (LOGIKA GRY)
+    // =====================================================================
+
+    function startStory() {
+        const nameInput = document.getElementById('player-name').value.trim();
+        if (!nameInput) { 
+            alert("Proszę wpisać imię dziecka!"); 
+            return; 
+        }
+
+        gameState.name = nameInput;
+        gameState.gender = document.getElementById('player-gender').value;
+        gameState.nameGenitive = document.getElementById('player-name-genitive').value.trim() || gameState.name;
+        gameState.nameDative = document.getElementById('player-name-dative').value.trim() || gameState.name;
+        gameState.nameAccusative = document.getElementById('player-name-accusative').value.trim() || gameState.name;
+        gameState.nameAblative = document.getElementById('player-name-ablative').value.trim() || gameState.name;
+        gameState.nameLocative = document.getElementById('player-name-locative').value.trim() || gameState.name;
+        gameState.nameVocative = document.getElementById('player-name-vocative').value.trim() || gameState.name;
+
+       
+        switchScreen('screen-start', 'screen-akt1');
+    }
+
+    // =====================================================================
+    // 3. FUNKCJE TECHNICZNE (NAWIGACJA, TŁA, RESTART)
+    // =====================================================================
+    function switchScreen(f, t, bg, uczynki) {
+        const fromEl = document.getElementById(f);
+        const toEl = document.getElementById(t);
+
+        if (uczynki != null)
+        {
+            for(let uczynek of uczynki)
+            {gameState.uczynki.add(uczynek)}
+        }
+
+        console.log("Uczynki:\n")
+        for (const uczynek of gameState.uczynki)
+        {
+            console.log(uczynek);
+        }
+
+        function aktualizujParagrafy(element){
+            if (element.tagName === 'P'){
+                element.innerHTML = sprawdzWarunkiUczynkow(odmienImie(odmianaCzynnosci(element.innerHTML)));
+            }
+            else{
+                for (const dziecko of element.children){
+                    aktualizujParagrafy(dziecko)
+                }
+            }
+        }
+
+        aktualizujParagrafy(toEl)
+
+        if (fromEl) fromEl.classList.remove('active');
+        if (toEl) toEl.classList.add('active');
+
+        // Bezpieczna zmiana koloru tła omijająca blokady CORS
+        if (bg) {
+            if (bg.startsWith('var(')) {
+                const varName = bg.replace('var(', '').replace(')', '').trim();
+                const computedBg = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+                document.body.style.background = computedBg;
+            } else {
+                document.body.style.background = bg;
+            }
+        }
+
+        // Twoje płynne przewijanie na górę strony
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goToForm() {
+        switchScreen('screen-akt2', 'screen-form', 'var(--bg-wioska)');
+    }
+
+    function resetStory() {
+        location.reload();
+    }
+</script>
+</body>
+</html>
